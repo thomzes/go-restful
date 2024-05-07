@@ -11,6 +11,7 @@ import (
 	"github.com/thomzes/go-restful/controller"
 	"github.com/thomzes/go-restful/exception"
 	"github.com/thomzes/go-restful/helper"
+	"github.com/thomzes/go-restful/middleware"
 	"github.com/thomzes/go-restful/repository"
 	"github.com/thomzes/go-restful/service"
 )
@@ -35,7 +36,7 @@ func main() {
 
 	server := http.Server{
 		Addr:    "localhost:3000",
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
 	err := server.ListenAndServe()
